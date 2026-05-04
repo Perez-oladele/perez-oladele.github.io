@@ -5,6 +5,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
 
     this.reset();
 });
+
 // MAKE FUNCTION GLOBAL (THIS IS THE FIX)
 window.sendMessage = function () {
   const input = document.getElementById("user-input");
@@ -40,210 +41,256 @@ function addMessage(text, sender) {
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 // RESPONSE LOGIC
 function getResponse(input) {
-input = input.toLowerCase();
+  input = input.toLowerCase();
 
-// GREETING
-if (input.includes("hello") || input.includes("hi")) {
-return `Hello, I am the assistant for ${PROFILE.name}. I can help you understand how he drives growth, revenue, and customer acquisition. What would you like to know?`;
+  // GREETING (UPGRADED UX)
+  if (input.includes("hello") || input.includes("hi")) {
+    return `Hello, I’m the digital assistant for ${PROFILE.name}, a results-driven Growth Strategist. 
+
+You can ask about:
+• Revenue growth strategies
+• SEO & lead generation
+• Case studies and results
+• Hiring or consulting opportunities
+
+How can I assist you today?`;
+  }
+
+  // WHO ARE YOU (EXECUTIVE POSITIONING)
+  if (input.includes("who") && input.includes("you")) {
+    return `${PROFILE.name} is a Growth Marketing and SEO Specialist based in ${PROFILE.location} with over ${PROFILE.experience} of experience.
+
+He focuses on driving measurable business outcomes including revenue growth, customer acquisition, and scalable digital systems across industries like Tech, Oil & Gas, and Financial Services.`;
+  }
+
+  // WHAT DO YOU DO (VALUE-FOCUSED)
+  if (input.includes("what") && input.includes("do")) {
+    return `${PROFILE.name} designs and executes growth strategies that directly impact revenue.
+
+His work spans SEO, paid acquisition, funnel optimization, and conversion rate improvement, all aligned to one goal: turning traffic into qualified leads and paying customers.`;
+  }
+
+  // RESULTS / IMPACT (NEW HIGH-VALUE TRIGGER)
+  if (
+    input.includes("result") ||
+    input.includes("impact") ||
+    input.includes("revenue") ||
+    input.includes("performance")
+  ) {
+    return `Here are some highlights of ${PROFILE.name}'s impact:
+
+• Closed over ₦80M annually with 25%+ profit margins in channel sales  
+• Scaled digital visibility and inbound acquisition for an oil & gas servicing group  
+• Improved lead generation pipelines using SEO and conversion-focused funnels  
+
+His approach is always data-driven and tied to measurable business outcomes.`;
+  }
+
+  // SKILLS (CONSULTANT-STYLE STRUCTURE)
+  if (input.includes("skill")) {
+    return `Core Capabilities:
+
+Growth & Marketing:
+${PROFILE.skills.marketing.join(", ")}
+
+Analytics & Tools:
+${PROFILE.skills.analytics.join(", ")}
+
+Development & Design:
+${PROFILE.skills.dev.join(", ")}
+
+Business & Strategy:
+${PROFILE.skills.business.join(", ")}`;
+  }
+
+  // PROJECTS (CASE STUDY FORMAT)
+  if (input.includes("project") || input.includes("case")) {
+    return PROFILE.projects
+      .map(p => `• ${p.name}\n${p.description}\nRole: ${p.role}\n`)
+      .join("\n");
+  }
+
+  // EXPERIENCE
+  if (input.includes("experience")) {
+    return `${PROFILE.name} has built experience across digital marketing, sales, and business development.
+
+Key roles include:
+${PROFILE.workExperience.map(job => `• ${job}`).join("\n")}
+
+He consistently exceeds targets and drives measurable growth across every role.`;
+  }
+
+  // CERTIFICATIONS
+  if (input.includes("cert")) {
+    return PROFILE.certifications.join("\n");
+  }
+
+  // DIFFERENTIATION (NEW)
+  if (
+    input.includes("why") ||
+    input.includes("different") ||
+    input.includes("choose")
+  ) {
+    return `${PROFILE.name} stands out because he doesn't just execute marketing tactics, he focuses on revenue outcomes.
+
+He combines:
+• SEO + paid acquisition strategy  
+• Sales and conversion psychology  
+• Business development experience  
+
+This allows him to bridge the gap between marketing activity and actual revenue growth.`;
+  }
+
+  // HIRING / AVAILABILITY (FILTERED & PREMIUM)
+  if (
+    input.includes("hire") ||
+    input.includes("available") ||
+    input.includes("job") ||
+    input.includes("freelance")
+  ) {
+    return `${PROFILE.name} is currently open to:
+
+• Senior-level roles in Growth Marketing or Digital Strategy  
+• High-value consulting and freelance engagements  
+
+He prioritizes opportunities focused on measurable growth, scalability, and long-term value.
+
+To discuss a role or project, reach out via ${PROFILE.contact.email}`;
+  }
+
+  // CONTACT (CLEAN + PRIORITIZED)
+  if (
+    input.includes("contact") ||
+    input.includes("email") ||
+    input.includes("phone") ||
+    input.includes("linkedin")
+  ) {
+    return `You can connect with ${PROFILE.name} here:
+
+Portfolio: ${PROFILE.contact.portfolio}
+Email: ${PROFILE.contact.email}
+Phone: ${PROFILE.contact.phone}`;
+  }
+
+  // LOCATION
+  if (input.includes("location") || input.includes("where")) {
+    return `${PROFILE.name} is based in ${PROFILE.location} and works with clients globally.`;
+  }
+
+  // PORTFOLIO
+  if (input.includes("portfolio") || input.includes("website")) {
+    return `You can explore his work and case studies here:
+${PROFILE.contact.portfolio}`;
+  }
+
+  // DEFAULT RESPONSE (SMART + GUIDED)
+  return `I can help you understand how ${PROFILE.name} drives growth and revenue.
+
+Try asking about:
+• Results and case studies  
+• SEO or lead generation strategy  
+• Hiring or collaboration  
+
+What would you like to explore?`;
 }
 
-// WHO ARE YOU
-if (input.includes("who") && input.includes("you")) {
-return `${PROFILE.name} is an SEO Growth Specialist and Growth Marketer based in ${PROFILE.location}. He has ${PROFILE.experience} of experience helping businesses scale visibility, generate leads, and drive revenue.`;
-}
 
-// WHAT DO YOU DO
-if (input.includes("what") && input.includes("do")) {
-return `${PROFILE.name} specializes in ${PROFILE.roles.join(", ")}. His focus is on building systems that attract, convert, and retain customers, not just running campaigns.`;
-}
-
-// SKILLS
-if (input.includes("skill")) {
-return `Frontend: ${PROFILE.skills.frontend.join(", ")}.\n\nDesign: ${PROFILE.skills.design.join(", ")}.\n\nTools: ${PROFILE.skills.tools.join(", ")}.\n\nGrowth & Marketing: ${PROFILE.skills.marketing.join(", ")}.\n\nOther: ${PROFILE.skills.other.join(", ")}.`;
-}
-
-// PROJECTS
-if (input.includes("project") || input.includes("work")) {
-return PROFILE.projects
-.map(p => `${p.name}:\n${p.description}\nRole: ${p.role}\nTech: ${p.tech}`)
-.join("\n\n");
-}
-
-// EXPERIENCE
-if (input.includes("experience")) {
-return PROFILE.workExperience
-.map(job => `${job.role} at ${job.company} (${job.period})`)
-.join("\n");
-}
-
-// CERTIFICATIONS
-if (input.includes("cert") || input.includes("certificate")) {
-return PROFILE.certifications.join("\n");
-}
-
-// ACHIEVEMENTS
-if (input.includes("achievement") || input.includes("result")) {
-return PROFILE.achievements.join("\n");
-}
-
-// PERSONALITY / TRAITS
-if (input.includes("personality") || input.includes("trait")) {
-return PROFILE.personality.join(", ");
-}
-
-// AVAILABILITY (HIGH CONVERSION)
-if (
-input.includes("hire") ||
-input.includes("available") ||
-input.includes("job") ||
-input.includes("freelance") ||
-input.includes("consult")
-) {
-return `${PROFILE.availability.freelance}\n${PROFILE.availability.fulltime}\n\nPerez typically works on high-impact projects focused on growth and revenue. If you’d like to discuss a role or project, you can reach him via ${PROFILE.contact.email}`;
-}
-
-// CONTACT
-if (
-input.includes("contact") ||
-input.includes("email") ||
-input.includes("phone") ||
-input.includes("linkedin")
-) {
-return `Email: ${PROFILE.contact.email}\nPhone: ${PROFILE.contact.phone}\nLinkedIn/Portfolio: ${PROFILE.contact.linkedin}`;
-}
-
-// LOCATION
-if (input.includes("location") || input.includes("where")) {
-return `${PROFILE.name} is based in ${PROFILE.location}.`;
-}
-
-// WEBSITES
-if (input.includes("website") || input.includes("portfolio")) {
-return `You can view his work here:\n${PROFILE.websites.join("\n")}`;
-}
-
-// DEFAULT RESPONSE (SMART REDIRECT)
-return "I can help you with growth strategy, SEO, projects, experience, or how to work with Perez. What would you like to explore?";
-}
-
-
-// ENTER KEY SUPPORT
+// UX ENHANCEMENT (STRONG FIRST IMPRESSION)
 document.addEventListener("DOMContentLoaded", function () {
-const chatBox = document.getElementById("chat-box");
-if (chatBox) {
-let welcome = document.createElement("div");
-welcome.className = "message bot";
-welcome.textContent = "Hi, I can tell you how Perez drives growth, leads, and revenue. Ask me anything.";
-chatBox.appendChild(welcome);
-}
+  const chatBox = document.getElementById("chat-box");
 
-document.addEventListener("keydown", function (e) {
-if (e.key === "Enter") {
-const active = document.activeElement;
-if (active && active.id === "user-input") {
-e.preventDefault();
-window.sendMessage();
-}
-}
+  if (chatBox) {
+    let welcome = document.createElement("div");
+    welcome.className = "message bot";
+    welcome.textContent = "Hi, I represent Perez Oladele, a Growth Strategist focused on revenue and scalable digital growth. Ask me how he can help your business grow.";
+    chatBox.appendChild(welcome);
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const active = document.activeElement;
+      if (active && active.id === "user-input") {
+        e.preventDefault();
+        window.sendMessage();
+      }
+    }
+  });
 });
-});
 
 
-// PROFILE DATA
+// PROFILE OBJECT (FULLY OPTIMIZED)
 const PROFILE = {
-name: "Perez Oladele",
-location: "Gowon Estate, Lagos, Nigeria",
-experience: "6+ years",
+  name: "Perez Oladele",
+  location: "Gowon Estate, Lagos, Nigeria",
+  experience: "6+ years",
 
-roles: [
-"SEO Growth Specialist",
-"Growth Marketer",
-"Digital Marketing Strategist",
-"Business Development Specialist"
-],
+  skills: {
+    marketing: [
+      "SEO (On-page, Technical, Off-page)",
+      "Conversion Rate Optimization",
+      "Funnel Design & Lead Generation",
+      "Paid Ads Strategy (Meta & LinkedIn)"
+    ],
+    analytics: [
+      "Google Analytics (GA4)",
+      "Google Search Console",
+      "Meta Ads Manager",
+      "LinkedIn Campaign Manager"
+    ],
+    dev: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Canva",
+      "CapCut",
+      "Adobe InDesign"
+    ],
+    business: [
+      "Copywriting",
+      "Brand Positioning",
+      "Business Development",
+      "Sales Strategy & Closing"
+    ]
+  },
 
-personality: [
-"Strategic",
-"Results-driven",
-"Analytical",
-"Business-focused",
-"Clear communicator"
-],
+  projects: [
+    {
+      name: "Future Concerns Group Digital Growth",
+      description: "Scaled digital presence and improved inbound acquisition across multiple subsidiaries using SEO and LinkedIn-driven strategies.",
+      role: "Digital Marketing Manager"
+    },
+    {
+      name: "PPE & Safety Equipment Sales Optimization",
+      description: "Increased visibility and lead generation through SEO and conversion-focused sales funnels for industrial products.",
+      role: "Growth Strategist"
+    },
+    {
+      name: "Channel Sales Expansion",
+      description: "Closed deals worth over ₦80M annually with strong profit margins through strategic sales execution and negotiation.",
+      role: "Sales Lead / Business Development"
+    },
+    {
+      name: "Personal Portfolio Website",
+      description: "Designed and developed a professional portfolio showcasing services, strategy, and case studies.",
+      role: "Designer & Developer"
+    }
+  ],
 
-skills: {
-frontend: ["HTML", "CSS", "JavaScript"],
-design: ["Canva", "CapCut", "Adobe InDesign", "PowerPoint"],
-tools: ["Google Analytics (GA4)", "Google Search Console", "Meta Ads Manager", "LinkedIn Campaign Manager"],
-marketing: ["SEO", "Conversion Rate Optimization", "Lead Generation", "Funnel Design", "Paid Ads Strategy"],
-other: ["Copywriting", "Branding", "Business Development", "Sales Strategy"]
-},
+  workExperience: [
+    "Digital Marketing Manager – Future Concerns Group",
+    "Business Development Manager / Sales Lead – Multiple Firms"
+  ],
 
-availability: {
-freelance: "Available for high-value freelance and consulting projects.",
-fulltime: "Open to senior-level roles in growth marketing, digital strategy, and business development."
-},
+  certifications: [
+    "Cybersecurity Certification – Career Insights",
+    "SEO Certification – Udemy"
+  ],
 
-contact: {
-email: "perezoladele@gmail.com",
-phone: "07032530732",
-linkedin: "https://perez-oladele.github.io/"
-},
-
-achievements: [
-"Closed deals worth over ₦80M annually with 25%+ profit margins",
-"Consistently exceeded sales and revenue targets",
-"Led teams to outperform growth and acquisition benchmarks"
-],
-
-certifications: [
-"Cybersecurity Certification – Career Insights",
-"SEO Certification – Udemy"
-],
-
-workExperience: [
-{
-role: "Digital Marketing Manager",
-company: "Future Concerns Group",
-period: "Current"
-},
-{
-role: "Business Development Manager / Sales Lead",
-company: "Multiple Firms",
-period: "Previous Roles"
-}
-],
-
-projects: [
-{
-name: "Future Concerns Group Digital Growth",
-description: "Scaled the online presence of a multi-subsidiary oil and gas servicing company.",
-role: "Digital Marketing Manager",
-tech: "SEO, LinkedIn Marketing, Content Strategy, Analytics"
-},
-{
-name: "PPE & Safety Equipment Sales Optimization",
-description: "Improved visibility and inbound lead generation for industrial safety products.",
-role: "Growth Strategist",
-tech: "SEO, Funnels, Copywriting"
-},
-{
-name: "Channel Sales Expansion",
-description: "Closed over ₦80M in annual deals with strong profit margins.",
-role: "Sales Lead / Business Development",
-tech: "CRM, Sales Strategy, Negotiation"
-},
-{
-name: "Personal Portfolio Website",
-description: "A portfolio showcasing services, projects, and growth expertise.",
-role: "Designer & Developer",
-tech: "HTML, CSS, JavaScript"
-}
-],
-
-websites: [
-"https://perez-oladele.github.io/"
-]
+  contact: {
+    email: "perezoladele@gmail.com",
+    phone: "07032530732",
+    portfolio: "https://perez-oladele.github.io/"
+  }
 };
