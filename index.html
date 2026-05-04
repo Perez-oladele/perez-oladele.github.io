@@ -4,115 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perez Oladele | Portfolio</title>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
 
-body {
-    background: #0f172a;
-    color: #e2e8f0;
-    line-height: 1.6;
-}
-
-header, footer {
-    position: fixed;
-    width: 100%;
-    background: #020617;
-    color: #fff;
-    z-index: 1000;
-    padding: 15px 40px;
-}
-
-header {
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer {
-    bottom: 0;
-    text-align: center;
-    font-size: 14px;
-}
-
-main {
-    padding: 100px 40px 80px;
-}
-
-section {
-    margin-bottom: 60px;
-}
-
-h1, h2, h3 {
-    color: #38bdf8;
-}
-
-.hero {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.hero img {
-    width: 280px;
-    border-radius: 12px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #38bdf8;
-    color: #020617;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #020617;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-ul {
-    list-style: none;
-}
-
-ul li::before {
-    content: "✔ ";
-    color: #38bdf8;
-}
-
-.contact form {
-    display: grid;
-    gap: 10px;
-}
-
-input, textarea {
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-}
-
-.social a {
-    margin-right: 10px;
-    color: #38bdf8;
-    text-decoration: none;
-}
-</style>
+<!-- External CSS -->
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -217,24 +111,21 @@ input, textarea {
     <a href="https://wa.me/message/ZFCRA6VJCINCO1" class="btn">WhatsApp</a>
 </section>
 
-<!-- Gallery -->
 <section> 
 <h2>Gallery</h2>
 <div class="gallery">
   <img src="Peak2.jpg" alt="Work image">
-    <img src="Peak3.jpg" alt="Work image">
+  <img src="Peak3.jpg" alt="Work image">
 </div>
 </section>
 
-
-<!-- Contact -->
 <section class="contact">
     <h2>Contact</h2>
     <p>Email: perezoladele@gmail.com</p>
     <p>Phone: +234 703 253 0732</p>
     <p>Location: Lagos, Nigeria</p>
 
-    <form>
+    <form id="contactForm">
         <input type="text" placeholder="Name" required>
         <input type="email" placeholder="Email" required>
         <input type="text" placeholder="Phone">
@@ -249,5 +140,8 @@ input, textarea {
     <p>© 2026 Perez Oladele | Fortitude Marketing Agency</p>
 </footer>
 
+<!-- External JS -->
+<script src="script.js"></script>
+
 </body>
-  </html>
+</html>
