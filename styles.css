@@ -106,9 +106,10 @@ input, textarea {
     text-decoration: none;
 }
 
-.gallery {
-    display: flex;
-    gap: 10px;
+.gallery img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
 }
 
 .gallery img {
