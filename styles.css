@@ -145,37 +145,69 @@ form button:hover {
 }
 
 .chatbot-box {
-  max-width: 100%;
   width: 100%;
-  margin: 20px 0; /* removes center squeeze */
+  max-width: 500px;
+  height: 450px;
+  margin: 20px auto;
+  background: #020617;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #1e293b;
 }
 
+/* THIS is the key fix */
 #chat-box {
-  height: 400px; /* or 50vh for responsive height */
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
 }
+
+/* message bubbles */
 .message {
   margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 75%;
+  word-wrap: break-word;
 }
 
+/* user */
 .user {
-  text-align: right;
-  color: #333;
+  margin-left: auto;
+  background: #38bdf8;
+  color: #020617;
 }
 
+/* bot */
 .bot {
-  text-align: left;
-  color: #2c7be5;
+  margin-right: auto;
+  background: #1e293b;
+  color: #e2e8f0;
 }
 
+/* input area */
 .input-area {
   display: flex;
+  border-top: 1px solid #1e293b;
 }
 
 .input-area input {
   flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: #020617;
+  color: white;
+}
+
+.input-area button {
+  padding: 10px 15px;
+  background: #38bdf8;
+  color: #020617;
+  border: none;
+  cursor: pointer;
 }
 
 .input-area button {
