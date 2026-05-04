@@ -144,9 +144,14 @@ form button:hover {
   background: #004182;
 }
 
+.chatbot-box {
+  max-width: 100%;
+  width: 100%;
+  margin: 20px 0; /* removes center squeeze */
+}
+
 #chat-box {
-  height: 50vh;
-  min-height: 300px;
+  height: 400px; /* or 50vh for responsive height */
 }
 .message {
   margin: 8px 0;
